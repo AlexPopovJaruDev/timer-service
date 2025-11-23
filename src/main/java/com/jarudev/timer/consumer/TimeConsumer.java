@@ -5,6 +5,7 @@ import com.jarudev.timer.properties.ConsumerProperties;
 import com.jarudev.timer.service.TimeService;
 import com.jarudev.timer.storage.TimeQueueStorage;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -100,5 +101,10 @@ public class TimeConsumer {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    @PreDestroy
+    public void stop() {
+        executor.shutdownNow();
     }
 }

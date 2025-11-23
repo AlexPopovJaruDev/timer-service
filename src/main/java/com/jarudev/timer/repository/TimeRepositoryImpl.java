@@ -13,10 +13,10 @@ import java.util.List;
 public class TimeRepositoryImpl implements TimeRepository {
 
     private static final String INSERT_SQL =
-            "INSERT INTO time_entry (time) VALUES (?)";
+            "INSERT INTO time_records (time) VALUES (?)";
 
     private static final String SELECT_ALL_SQL =
-            "SELECT time FROM time_entry";
+            "SELECT time FROM time_records";
 
     private final JdbcTemplate jdbcTemplate;
 
