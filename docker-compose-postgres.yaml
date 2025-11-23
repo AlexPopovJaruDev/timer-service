@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:17
+    container_name: timer-service-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-timer_service}
+      POSTGRES_USER: ${DB_USERNAME:-test}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-test}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:

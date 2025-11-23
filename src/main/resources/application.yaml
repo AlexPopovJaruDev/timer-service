@@ -1,0 +1,31 @@
+timer-service:
+  queue:
+    max-buffer-size: 100000
+  consumer:
+    batch-threshold: 10
+    max-batch-size: 100
+    empty-queue-sleep: 1s
+    db-unavailable-sleep: 2s
+  producer:
+    publish-rate-ms: 1000
+  jdbc:
+    query-timeout: 15
+  health:
+    initial-delay: 0
+    retry-period: 5
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/timer_service}
+    username: ${DB_USERNAME:test}
+    password: ${DB_PASSWORD:test}
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+    hikari:
+      connection-timeout: 5000
+      validation-timeout: 5000
+
+logging:
+  level:
+    root: ${TIMER_SERVICE_LOG_LEVEL:INFO}

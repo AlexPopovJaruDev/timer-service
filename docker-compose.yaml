@@ -1,0 +1,36 @@
+services:
+  timer-service-postgres:
+    image: postgres:17
+    container_name: timer-service-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-timer_service}
+      POSTGRES_USER: ${DB_USERNAME:-test}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-test}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  timer-service:
+    build: .
+    container_name: timer-service
+    restart: always
+    depends_on:
+      - timer-service-postgres
+    environment:
+      DB_URL: jdbc:postgresql://timer-service-postgres:5432/${DB_DATABASE:-timer_service}
+      DB_USERNAME: ${DB_USERNAME:-test}
+      DB_PASSWORD: ${DB_PASSWORD:-test}
+      TIMER_SERVICE_LOG_LEVEL: ${TIMER_LEVEL_LOG_LEVEL:-INFO}
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:
