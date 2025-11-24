@@ -25,7 +25,7 @@
 - **Java 17** 
 - **Spring Boot 3 (Web + Data JDBC + Scheduling)**
 - **PostgreSQL 17** - основная БД.
-- **Liquibase** - миграции схемы БД (таблица `time_entry` создаётся при старте).
+- **Liquibase** - миграции схемы БД (таблица `time_records` создаётся при старте).
 - **Logback** - логирование в консоль и в файл с ротацией.
 - **Testcontainers + JUnit 5** (в тестах) - интеграционные тесты с живым Postgres в контейнере.
   
