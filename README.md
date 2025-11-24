@@ -100,7 +100,7 @@ TIMER_TIMEZONE=Europe/Moscow
 ```
 
 ### Запуск
-В репозитории есть docker-compose.yml, который поднимает:
+В репозитории есть docker-compose.yaml, который поднимает:
 - timer-service-postgres - контейнер с PostgreSQL
 - timer-service - Spring Boot приложение
 
