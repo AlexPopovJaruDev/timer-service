@@ -82,9 +82,10 @@ spring:
 - DB_DATABASE - имя базы данных (по умолчанию timer_service)
 - DB_USERNAME - пользователь БД (по умолчанию test)
 - DB_PASSWORD - пароль к БД (по умолчанию test)
-- DB_URL - URL для подключения к БД (для локального запуска без Docker)
+- DB_URL - URL для подключения к БД
 - DB_DRIVER - драйвер JDBC (по умолчанию org.postgresql.Driver)
 - TIMER_SERVICE_LOG_LEVEL - уровень логирования (INFO / DEBUG и т.д.)
+- TIMER_TIMEZONE - таймзона приложения
 
 Пример .env:
 
@@ -95,6 +96,7 @@ DB_PASSWORD=test
 DB_URL=jdbc:postgresql://localhost:5432/timer_service
 DB_DRIVER=org.postgresql.Driver
 TIMER_SERVICE_LOG_LEVEL=INFO
+TIMER_TIMEZONE=Europe/Moscow
 ```
 
 ### Запуск
@@ -102,15 +104,19 @@ TIMER_SERVICE_LOG_LEVEL=INFO
 - timer-service-postgres - контейнер с PostgreSQL
 - timer-service - Spring Boot приложение
 
-Для запуска можно использовать команду 
+Для быстрого запуска через командную строку необходимо из корневой директории проекта (с файлом `docker-compose.yaml`) использовать команду 
 ```
-docker compose up --build
+docker compose up
 ```
 
 После старта:
-- приложение доступно на порту 8080
+- приложение доступно на localhost:8080
 - БД доступно на localhost:5432 (если проброшен порт по умолчанию)
+
+Для проверки работоспособности можно отправить запрос (базово `http://localhost:8080/api/time/all`), а для проверки устойчивости можно в Докере остановить `timer-service-postgres`, 
+подождать/отправить запросы по эндпоинту `/api/time/all`, после чего вновь запустить `timer-service-postgres`. После восстановления соединения данные, которые во время его отсутствия 
+писались только во внутреннюю очередь, будут записаны в БД.
 
 ### Локальный Postgres только (опционально)
 
-Есть отдельный docker-compose-postgres.yaml файл только для БД (локальная разработка), его можно использовать, если хотите запускать приложение напрямую из IDE, а БД держать в контейнере.
+Есть отдельный `docker-compose-postgres.yaml` файл только для БД (локальная разработка), его можно использовать, если хотите запускать приложение напрямую из IDE, а БД держать в контейнере.
