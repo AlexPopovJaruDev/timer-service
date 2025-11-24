@@ -29,6 +29,8 @@ services:
       DB_USERNAME: ${DB_USERNAME:-test}
       DB_PASSWORD: ${DB_PASSWORD:-test}
       TIMER_SERVICE_LOG_LEVEL: ${TIMER_LEVEL_LOG_LEVEL:-INFO}
+      TZ: ${TIMER_TIMEZONE:-Europe/Moscow}
+      JAVA_TOOL_OPTIONS: -Duser.timezone=${TIMER_TIMEZONE:-Europe/Moscow}
     ports:
       - "8080:8080"
 
