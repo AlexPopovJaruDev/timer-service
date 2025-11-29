@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class JdbcConfig {
 
+    //another comment
+
     private final JdbcProperties props;
 
     @Bean
