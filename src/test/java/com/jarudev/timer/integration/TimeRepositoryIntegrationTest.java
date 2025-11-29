@@ -37,7 +37,7 @@ class TimeRepositoryIntegrationTest {
 
     @BeforeEach
     void cleanDb() {
-        jdbcTemplate.update("DELETE FROM time_entry");
+        jdbcTemplate.update("DELETE FROM time_base");
     }
 
     @Test
