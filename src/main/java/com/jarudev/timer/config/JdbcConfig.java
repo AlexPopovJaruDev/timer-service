@@ -14,6 +14,8 @@ public class JdbcConfig {
 
     private final JdbcProperties props;
 
+    //some comment changes
+
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         JdbcTemplate template = new JdbcTemplate(dataSource);
