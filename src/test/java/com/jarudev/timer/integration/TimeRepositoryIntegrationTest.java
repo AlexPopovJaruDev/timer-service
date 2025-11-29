@@ -35,9 +35,6 @@ class TimeRepositoryIntegrationTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //TODO: rebase
-    //new comment real
-    //another comment
     @BeforeEach
     void cleanDb() {
         jdbcTemplate.update("DELETE FROM time_records");
