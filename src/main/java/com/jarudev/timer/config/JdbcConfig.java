@@ -17,6 +17,7 @@ public class JdbcConfig {
     private final JdbcProperties props;
 
     // измененный комментарий новая ветка
+    // added 2 comment
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
