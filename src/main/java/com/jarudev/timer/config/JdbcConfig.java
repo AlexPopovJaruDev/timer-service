@@ -12,12 +12,12 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class JdbcConfig {
 
-    //another comment
+    //comment from github
 
     private final JdbcProperties props;
 
-    // измененный комментарий новая ветка
-    // added 2 comment
+    // измененный комментарий from github
+    // added 2 comments from github
 
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
